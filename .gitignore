@@ -9,6 +9,8 @@ Makefile.in
 
 # http://www.gnu.org/software/autoconf
 
+env
+
 autom4te.cache
 /autoscan.log
 /autoscan-*.log
