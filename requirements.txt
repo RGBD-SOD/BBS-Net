@@ -1,3 +1,5 @@
 torch
 opencv-python
 black
+transformers
+torchvision
