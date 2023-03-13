@@ -1,8 +1,8 @@
 import torch
 import torch.nn as nn
 import torchvision.models as models
-from ResNet import ResNet50
-from torch.nn import functional as F
+
+from .ResNet import ResNet50
 
 
 def conv3x3(in_planes, out_planes, stride=1):

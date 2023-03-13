@@ -10,6 +10,7 @@ Makefile.in
 # http://www.gnu.org/software/autoconf
 
 env
+__pycache__
 
 autom4te.cache
 /autoscan.log

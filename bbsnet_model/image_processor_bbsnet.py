@@ -10,7 +10,7 @@ from transformers.image_processing_utils import BaseImageProcessor
 
 # from transformers import VideoMAEImageProcessor, ViTImageProcessor
 # See VideoMAEImageProcessor, ViTImageProcessor for more examples
-class BBSNetImagePreProcessor(BaseImageProcessor):
+class BBSNetImageProcessor(BaseImageProcessor):
     model_input_names = ["bbsnet_preprocessor"]
 
     def __init__(self, testsize: Optional[int] = 352, **kwargs) -> None:
