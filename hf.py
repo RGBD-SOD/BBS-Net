@@ -10,6 +10,6 @@ BBSNetImageProcessor.register_for_auto_class("AutoImageProcessor")
 
 config = BBSNetConfig()
 model = BBSNetModel(config)
-model.model.load_state_dict(torch.load("./model_pths/BBSNet.pth"))
+model.model.load_state_dict(torch.load("./model_pths/BBSNet.pth", map_location="cpu"))
 
 model.push_to_hub("RGBD-SOD/bbsnet")
