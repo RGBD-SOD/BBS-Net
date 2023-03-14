@@ -1,108 +1,103 @@
 # BBS-Net
-BBS-Net: RGB-D Salient Object Detection with
-a Bifurcated Backbone Strategy Network
 
-<p align="center">
-    <img src="Images/pipeline.png" width="80%"/> <br />
- <em> 
-    Figure 1: Pipeline of the BBS-Net.
-    </em>
-</p>
+The is not an official implementation of BBS-Net (refer to origin [here](https://github.com/DengPingFan/BBS-Net))
 
-## 1. Environments
+We aim to improve the project by implementing:
 
-- Python 3.10
-- Ubuntu 22.04
+- Reimplementing BBS-Net with Python 3.10 on Ubuntu 22.04
+- Build the model on [HuggingFace](https://huggingface.co/RGBD-SOD/bbsnet) for ease of integration
 
-## 2. Data Preparation
+## Installation
 
- - Download the raw data from [Baidu Pan](https://pan.baidu.com/s/1SxBjlTF4Tb74WjuDsRmM3w) [code: yiy1] or [Google Drive](https://drive.google.com/drive/folders/1gIMun9bM5JDrs98sLjXt7XoFCdvy1DXF?usp=sharing) and trained model (BBSNet.pth) from [Here](https://pan.baidu.com/s/1Fn-Hvdou4DDWcgeTtx081g) [code: dwcp]. Then put them under the following directory:
- 
-        -BBS_dataset\ 
-          -RGBD_for_train\  
-          -RGBD_for_test\
-          -test_in_train\
-        -BBSNet
-          -models\
-          -model_pths\
-             -BBSNet.pth
-          ...
-          
- - Note that the depth maps of the raw data above are not normalized. If you train and test using the normalized depth maps, the performance will be improved.
-	  
-## 3. Training & Testing
+- Python 3.10 (tested version)
+- `pip install -r requirements.txt`
 
-- Train the BBSNet:
+## Use
 
-    `python BBSNet_train.py --batchsize 10 --gpu_id 0 `
+```python
+from typing import Dict
 
-- Test the BBSNet:
+import numpy as np
+from datasets import load_dataset
+from matplotlib import cm
+from PIL import Image
+from torch import Tensor
+from transformers import AutoImageProcessor, AutoModel
 
-    `python BBSNet_test.py --gpu_id 0 `
-    
-    The test maps will be saved to './test_maps/'.
+model = AutoModel.from_pretrained("RGBD-SOD/bbsnet", trust_remote_code=True)
+image_processor = AutoImageProcessor.from_pretrained(
+    "RGBD-SOD/bbsnet", trust_remote_code=True
+)
+dataset = load_dataset("RGBD-SOD/test", "v1", split="train", cache_dir="data")
 
-- Evaluate the result maps:
-    
-    You can evaluate the result maps using the tool in [Python_GPU Version](https://github.com/zyjwuyan/SOD_Evaluation_Metrics) or [Matlab Version](http://dpfan.net/d3netbenchmark/).
-    
-- If you need the codes using VGG16 and VGG19 backbones, please send to the email (zhaiyingjier@163.com). Please provide your Name & Institution. Please note the code can be only used for research purpose.
-## 4. Results
-### 4.1 Qualitative Comparison
-<p align="center">
-    <img src="Images/resultmap.png" width="80%"/> <br />
- <em> 
-    Figure 2: Qualitative visual comparison of the proposed model versus 8 SOTA
-models.
-    </em>
-</p>
-<p align="center">
-    <img src="./Images/detailed-comparisons.png" width="80%"/> <br />
- <em>
-  Table 1: Quantitative comparison of models using S-measure max F-measure, max E-measureand MAE scores on 7 datasets. 
-  </em>
-</p>
-<!--
-|  Dataset  | NJU2K  | NLPR | STERE |DES    |LFSD  |SSD |SIP|
-|  -------  | -----  |----  |-----  |---    |----  |---  |---|
-| S-measure |.921    |.930  |.908   |.933  | .864  | .882|.879 |
-| F-measure |.920    |.918  |.903   |.927  | .859  | .859|.883 |
-| E-measure |.949    |.961  |.942   |.966  | .901  | .919|.922 |
-| MAE       | .035   |.023  |.041   |.021  | .072  | .044|.055 |
--->
+index = 0
 
-### 4.2 Results of multiple backbones
+"""
+Get a specific sample from the dataset
 
-<p align="center">
-    <img src="./Images/backbone_result.png" width="80%"/> <br />
- <em>
-  Table 2: Performance comparison using different backbones. 
-  </em>
-</p>
+sample = {
+    'depth': <PIL.PngImagePlugin.PngImageFile image mode=L size=640x360>,
+    'rgb': <PIL.PngImagePlugin.PngImageFile image mode=RGB size=640x360>,
+    'gt': <PIL.PngImagePlugin.PngImageFile image mode=L size=640x360>,
+    'name': 'COME_Train_5'
+}
+"""
+sample = dataset[index]
 
-### 4.3 Download
- - Test maps of the above datasets (ResNet50 backbone) can be download from [here](https://pan.baidu.com/s/1O-AhThLWEDVgQiPhX3QVYw) [code: qgai ].
- - Test maps of vgg16 and vgg19 backbones of our model can be  download from [here](https://pan.baidu.com/s/1_hG3hC2Fpt1cbAWuPrHEPA) [code: zuds ].
- - Test maps of DUT-RGBD dataset (using the proposed training-test splits of [DMRA](https://openaccess.thecvf.com/content_ICCV_2019/papers/Piao_Depth-Induced_Multi-Scale_Recurrent_Attention_Network_for_Saliency_Detection_ICCV_2019_paper.pdf)) can be downloaded from [here](https://pan.baidu.com/s/15oc_-nwEKNiU1C9WRho5lg) [code: 3nme ].
-## 5. Citation
+depth: Image.Image = sample["depth"]
+rgb: Image.Image = sample["rgb"]
+gt: Image.Image = sample["gt"]
+name: str = sample["name"]
 
-Please cite the following paper if you use this repository in your reseach.
 
-	@inproceedings{fan2020bbsnet,
-	title={BBS-Net: RGB-D Salient Object Detection with a Bifurcated Backbone Strategy Network},
-	author={Fan, Deng-Ping and Zhai, Yingjie and Borji, Ali and Yang, Jufeng and Shao, Ling},
-	booktitle={ECCV},
-	year={2020}
-	}
+"""
+1. Preprocessing step
 
-- For more information about BBS-Net, please read the [Manuscript (PDF)](https://arxiv.org/pdf/2007.02713.pdf) ([Chinese version](https://pan.baidu.com/s/1zxni7QjBiewwA1Q-m7Cqfg)[code:0r4a]).
-- Note that there is a wrong in the Fig.3 (c) of the ECCV version. The second and third BConv3 in the first column of the figure should be BConv5 and BConv7 respectively.
+preprocessed_sample = {
+    'rgb': tensor([[[[-0.8507, ....0365]]]]),
+    'gt': tensor([[[[0., 0., 0...., 0.]]]]),
+    'depth': tensor([[[[0.9529, 0....3490]]]])
+}
+"""
+preprocessed_sample: Dict[str, Tensor] = image_processor.preprocess(sample)
 
-## 6. Benchmark RGB-D SOD
+"""
+2. Prediction step
 
-The complete RGB-D SOD benchmark can be found in this page:
+output = {
+    'logits': tensor([[[[-5.1966, ...ackward0>)
+}
+"""
+output: Dict[str, Tensor] = model(
+    preprocessed_sample["rgb"], preprocessed_sample["depth"]
+)
 
-http://dpfan.net/d3netbenchmark/
+"""
+3. Postprocessing step
+"""
+postprocessed_sample: np.ndarray = image_processor.postprocess(
+    output["logits"], [sample["gt"].size[1], sample["gt"].size[0]]
+)
+prediction = Image.fromarray(np.uint8(cm.gist_earth(postprocessed_sample) * 255))
 
-## 7. Acknowledgement
-We implement this project based on the code of ‘Cascaded Partial Decoder for Fast and Accurate Salient Object Detection, CVPR2019’ proposed by Wu et al.
+"""
+Show the predicted salient map and the corresponding ground-truth(GT)
+"""
+prediction.show()
+gt.show()
+```
+
+## Citation
+
+Please cite the following paper if you use BBS-Net in your reseach.
+
+```
+@inproceedings{fan2020bbs,
+  title={BBS-Net: RGB-D salient object detection with a bifurcated backbone strategy network},
+  author={Fan, Deng-Ping and Zhai, Yingjie and Borji, Ali and Yang, Jufeng and Shao, Ling},
+  booktitle={Computer Vision--ECCV 2020: 16th European Conference, Glasgow, UK, August 23--28, 2020, Proceedings, Part XII},
+  pages={275--292},
+  year={2020},
+  organization={Springer}
+}
+```
