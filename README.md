@@ -4,8 +4,9 @@ The is not an official implementation of BBS-Net (refer to origin [here](https:/
 
 We aim to improve the project by implementing:
 
-- Reimplementing BBS-Net with Python 3.10 on Ubuntu 22.04
-- Build the model on [HuggingFace](https://huggingface.co/RGBD-SOD/bbsnet) for ease of integration
+- Format the code with **black** formatter
+- Reimplementing **BBS-Net** with **Python 3.10** on **Ubuntu 22.04**
+- Build the model on **HuggingFace** ([https://huggingface.co/RGBD-SOD/bbsnet](https://huggingface.co/RGBD-SOD/bbsnet)) for ease of integration
 
 ## Installation
 
