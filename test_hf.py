@@ -14,6 +14,7 @@ index = 0
 
 """
 Get a specific sample from the dataset
+
 sample = {
     'depth': <PIL.PngImagePlugin.PngImageFile image mode=L size=640x360>, 
     'rgb': <PIL.PngImagePlugin.PngImageFile image mode=RGB size=640x360>, 
@@ -22,7 +23,6 @@ sample = {
 }
 """
 sample = dataset[index]
-sample["gt"].show()
 
 
 """
@@ -44,5 +44,10 @@ output = model(preprocessed_sample["rgb"], preprocessed_sample["depth"])
 postprocessed_sample: np.ndarray = image_processor.postprocess(
     output["logits"], [sample["gt"].size[1], sample["gt"].size[0]]
 )
-rs = Image.fromarray(np.uint8(cm.gist_earth(postprocessed_sample) * 255))
-rs.show()
+prediction = Image.fromarray(np.uint8(cm.gist_earth(postprocessed_sample) * 255))
+
+"""
+Show the predicted salient map and the corresponding ground-truth(GT)
+"""
+prediction.show()
+sample["gt"].show()
