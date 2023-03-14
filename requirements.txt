@@ -3,3 +3,4 @@ opencv-python
 black
 transformers
 torchvision
+datasets
