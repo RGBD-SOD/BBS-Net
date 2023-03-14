@@ -7,8 +7,7 @@ from PIL.Image import Image
 from torch import Tensor
 from transformers.image_processing_utils import BaseImageProcessor
 
-
-from transformers import VideoMAEImageProcessor, ViTImageProcessor
+# from transformers import VideoMAEImageProcessor, ViTImageProcessor
 
 INPUT_IMAGE_SIZE = (352, 352)
 
