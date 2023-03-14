@@ -52,3 +52,4 @@ m4/lt~obsolete.m4
 Makefile
 model_pths/*
 !model_pths/.gitkeep
+data

@@ -4,3 +4,4 @@ black
 transformers
 torchvision
 datasets
+matplotlib
