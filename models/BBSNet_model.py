@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-import torchvision.models as models
+import torchvision
 
 from .ResNet import ResNet50
 
@@ -421,7 +421,7 @@ class BBSNet(nn.Module):
 
     # initialize the weights
     def initialize_weights(self):
-        res50 = models.resnet50(pretrained=True)
+        res50 = torchvision.models.resnet50(pretrained=True)
         pretrained_dict = res50.state_dict()
         all_params = {}
         for k, v in self.resnet.state_dict().items():
