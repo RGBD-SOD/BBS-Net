@@ -3,9 +3,8 @@ from typing import Dict, Optional
 from torch import Tensor, nn
 from transformers import PreTrainedModel
 
-from models.BBSNet_model import BBSNet
-
 from .configuration_bbsnet import BBSNetConfig
+from .BBSNet_model import BBSNet
 
 
 class BBSNetModel(PreTrainedModel):
