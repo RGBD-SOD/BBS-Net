@@ -1,6 +1,7 @@
-# BBS-Net
+# <p align=center>`BBS-Net`</p> 
 
-The is not an official implementation of BBS-Net (refer to origin [here](https://github.com/DengPingFan/BBS-Net))
+> **Note**
+> <em>The is not an official implementation of BBS-Net (refer to origin [here](https://github.com/DengPingFan/BBS-Net))</em>
 
 We aim to improve the project by implementing:
 
