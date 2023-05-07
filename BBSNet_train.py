@@ -11,9 +11,12 @@ from models.BBSNet_model import BBSNet
 from data import get_loader, test_dataset
 from utils import clip_gradient, adjust_lr
 from tensorboardX import SummaryWriter
+import wandb
 import logging
 import torch.backends.cudnn as cudnn
 from options import opt
+
+wandb.init(project='BBS-Net', sync_tensorboard=True)
 
 # set the device for training
 if opt.gpu_id == "0":
