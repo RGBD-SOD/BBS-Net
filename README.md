@@ -1,7 +1,6 @@
-# <p align=center>`BBS-Net`</p> 
+# <p align=center>`BBS-Net`</p>
 
-> **Note**
-> <em>The is not an official implementation of BBS-Net (refer to origin [here](https://github.com/DengPingFan/BBS-Net))</em>
+> **Note** > <em>The is not an official implementation of BBS-Net (refer to origin [here](https://github.com/DengPingFan/BBS-Net))</em>
 
 We aim to improve the project by implementing:
 
@@ -88,6 +87,23 @@ Show the predicted salient map and the corresponding ground-truth(GT)
 prediction.show()
 gt.show()
 ```
+
+## Train model
+
+```bash
+python BBSNet_train.py  \
+    --rgb_root /kaggle/input/rgbdsod-set1/train/RGB/ \
+    --depth_root /kaggle/input/rgbdsod-set1/train/depths/ \
+    --gt_root /kaggle/input/rgbdsod-set1/train/GT/ \
+    --test_rgb_root /kaggle/input/rgbdsod-set1/test/COME-E/RGB/ \
+    --test_depth_root /kaggle/input/rgbdsod-set1/test/COME-E/depths/ \
+    --test_gt_root /kaggle/input/rgbdsod-set1/test/COME-E/GT/ \
+    --batchsize 16
+```
+
+## Experiment on COME15K
+
+- See [reports](https://wandb.ai/thinh-huynh-re/BBS-Net/reports/Experiment-Train-BBS-Net-on-COME15K--Vmlldzo0MzAyODI3) on Wandb
 
 ## Citation
 
