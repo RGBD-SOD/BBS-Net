@@ -6,7 +6,8 @@ We aim to improve the project by implementing:
 
 - Format the code with **black** formatter
 - Reimplementing **BBS-Net** with **Python 3.10** on **Ubuntu 22.04**
-- Build the model on **HuggingFace** ([https://huggingface.co/RGBD-SOD/bbsnet](https://huggingface.co/RGBD-SOD/bbsnet)) for ease of integration
+- Convert the model to **HuggingFace**'s model format ([https://huggingface.co/RGBD-SOD/bbsnet](https://huggingface.co/RGBD-SOD/bbsnet))
+- Experiment on COME15K dataset
 
 ## Demo on HuggingFace
 
@@ -107,7 +108,7 @@ python BBSNet_train.py  \
     --batchsize 16
 ```
 
-## Experiment on COME15K
+## Experiment on COME15K dataset
 
 - See [reports](https://wandb.ai/thinh-huynh-re/BBS-Net/reports/Experiment-Train-BBS-Net-on-COME15K--Vmlldzo0MzAyODI3) on Wandb
 
