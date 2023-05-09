@@ -8,6 +8,12 @@ We aim to improve the project by implementing:
 - Reimplementing **BBS-Net** with **Python 3.10** on **Ubuntu 22.04**
 - Build the model on **HuggingFace** ([https://huggingface.co/RGBD-SOD/bbsnet](https://huggingface.co/RGBD-SOD/bbsnet)) for ease of integration
 
+## Demo on HuggingFace
+
+- Link: https://huggingface.co/spaces/RGBD-SOD/bbsnet
+
+<img src="Images/demo.png"/>
+
 ## Installation
 
 - Python 3.10 (tested version)
@@ -104,6 +110,8 @@ python BBSNet_train.py  \
 ## Experiment on COME15K
 
 - See [reports](https://wandb.ai/thinh-huynh-re/BBS-Net/reports/Experiment-Train-BBS-Net-on-COME15K--Vmlldzo0MzAyODI3) on Wandb
+
+<img src="Images/experiment.png"/>
 
 ## Citation
 
